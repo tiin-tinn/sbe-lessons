@@ -1,44 +1,55 @@
 <!doctype html>
-<html>
+<html lang="en">
   <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Strategic Brand Engagement</title>
     <style>
       body {
-        font-family: Arial;
-        padding: 40px;
-        background: #f7f7f7;
+        font-family: Arial, sans-serif;
+        max-width: 900px;
+        margin: 40px auto;
+        padding: 0 20px;
       }
       h1 {
-        margin-bottom: 20px;
+        margin-bottom: 8px;
       }
-      .lesson {
+      p {
+        color: #555;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 12px;
+        margin-top: 24px;
+      }
+      a.card {
         display: block;
-        padding: 12px;
-        margin: 8px 0;
-        background: white;
-        border-radius: 8px;
-        text-decoration: none;
-        color: black;
+        padding: 16px;
         border: 1px solid #ddd;
+        border-radius: 10px;
+        text-decoration: none;
+        color: #111;
+        background: #fff;
       }
-      .lesson:hover {
-        background: #eee;
+      a.card:hover {
+        background: #f7f7f7;
       }
     </style>
   </head>
-
   <body>
     <h1>Strategic Brand Engagement</h1>
+    <p>Lesson portal for adjunct access.</p>
 
-    <h2>Lessons</h2>
-
-    <a class="lesson" href="Lesson-01/">Lesson 01 – Introduction</a>
-    <a class="lesson" href="Lesson-02/">Lesson 02 – Positioning</a>
-    <a class="lesson" href="Lesson-03/">Lesson 03 – Identity</a>
-    <a class="lesson" href="Lesson-04/">Lesson 04 – Content Strategy</a>
-    <a class="lesson" href="Lesson-05/">Lesson 05 – Journey Mapping</a>
-    <a class="lesson" href="Lesson-06/">Lesson 06 – UX Flow</a>
-    <a class="lesson" href="Lesson-07/">Lesson 07 – UI Design</a>
-    <a class="lesson" href="Lesson-08/">Lesson 08 – Phygital Experience</a>
+    <div class="grid">
+      <a class="card" href="./Lesson-01/">Lesson 01</a>
+      <a class="card" href="./Lesson-02/">Lesson 02</a>
+      <a class="card" href="./Lesson-03/">Lesson 03</a>
+      <a class="card" href="./Lesson-04/">Lesson 04</a>
+      <a class="card" href="./Lesson-05/">Lesson 05</a>
+      <a class="card" href="./Lesson-06/">Lesson 06</a>
+      <a class="card" href="./Lesson-07/">Lesson 07</a>
+      <a class="card" href="./Lesson-08/">Lesson 08</a>
+    </div>
   </body>
 </html>
