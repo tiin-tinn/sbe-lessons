@@ -1,0 +1,560 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tutorial 04 — From Flow to Usable Screens</title>
+    <style>
+      :root {
+        --bg: #f6f6f3;
+        --ink: #1f1f1f;
+        --muted: #666;
+        --line: #d8d8d2;
+        --card: #ffffff;
+        --accent: #222;
+        --soft: #ecece7;
+        --caption: #505050;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        background: var(--bg);
+        color: var(--ink);
+        line-height: 1.6;
+      }
+      .page {
+        max-width: 1120px;
+        margin: 0 auto;
+        padding: 48px 24px 80px;
+      }
+      header {
+        margin-bottom: 40px;
+        border-bottom: 1px solid var(--line);
+        padding-bottom: 28px;
+      }
+      .eyebrow {
+        font-size: 0.8rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 8px;
+      }
+      h1 {
+        font-size: clamp(2rem, 4vw, 3.5rem);
+        line-height: 1.1;
+        margin: 0 0 16px;
+        font-weight: 700;
+      }
+      .intro {
+        max-width: 780px;
+        color: var(--muted);
+        font-size: 1.05rem;
+      }
+      .meta-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 16px;
+        margin: 32px 0;
+      }
+      .meta-card,
+      .phase,
+      .note-card,
+      .image-card {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 20px;
+      }
+      .meta-card h3 {
+        margin: 0 0 6px;
+        font-size: 0.95rem;
+      }
+      .meta-card p {
+        margin: 0;
+        color: var(--muted);
+      }
+      section {
+        margin-top: 48px;
+      }
+      h2 {
+        font-size: 1.6rem;
+        margin: 0 0 18px;
+      }
+      h3 {
+        margin-top: 0;
+      }
+      .phase {
+        margin-bottom: 20px;
+        display: grid;
+        grid-template-columns: 180px 1fr;
+        gap: 24px;
+      }
+      .phase-number {
+        font-size: 0.78rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--muted);
+        margin-bottom: 6px;
+      }
+      .duration {
+        display: inline-block;
+        margin-top: 10px;
+        padding: 4px 10px;
+        border-radius: 999px;
+        background: var(--soft);
+        font-size: 0.85rem;
+        color: var(--muted);
+      }
+      .phase h3 {
+        margin: 0 0 8px;
+        font-size: 1.3rem;
+      }
+      .phase h4 {
+        margin: 20px 0 6px;
+        font-size: 0.95rem;
+      }
+      ul {
+        margin: 8px 0 0 1.2rem;
+        padding: 0;
+      }
+      li {
+        margin-bottom: 6px;
+      }
+      blockquote {
+        margin: 18px 0 0;
+        padding: 14px 18px;
+        border-left: 4px solid var(--accent);
+        background: var(--soft);
+        border-radius: 0 12px 12px 0;
+        font-weight: 600;
+      }
+      .flow-box {
+        background: #202020;
+        color: #fff;
+        padding: 18px;
+        border-radius: 14px;
+        font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+        overflow-x: auto;
+        white-space: nowrap;
+        margin-top: 14px;
+      }
+      .two-col {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 18px;
+      }
+      .image-card {
+        margin: 22px 0 28px;
+        padding: 18px;
+      }
+      .image-card h3 {
+        margin: 0 0 6px;
+        font-size: 1rem;
+      }
+      .image-card p {
+        margin: 0 0 14px;
+        color: var(--caption);
+        font-size: 0.95rem;
+      }
+      .screenshot {
+        width: 100%;
+        max-width: 980px;
+        display: block;
+        margin: 18px auto 12px;
+        border-radius: 10px;
+        border: 1px solid var(--line);
+        background: #eeeeee;
+      }
+      .placeholder {
+        width: 100%;
+        max-width: 980px;
+        min-height: 340px;
+        display: grid;
+        place-items: center;
+        margin: 18px auto 12px;
+        border-radius: 10px;
+        border: 2px dashed var(--line);
+        background: #fafafa;
+        color: var(--muted);
+        text-align: center;
+        padding: 24px;
+      }
+      .caption {
+        text-align: center;
+        color: var(--muted);
+        font-size: 0.88rem;
+        margin: 8px auto 0;
+        max-width: 850px;
+      }
+      .callout {
+        background: var(--soft);
+        border-radius: 14px;
+        padding: 16px 18px;
+        margin-top: 16px;
+      }
+      .checklist li::marker {
+        content: "✓  ";
+      }
+      footer {
+        margin-top: 60px;
+        padding-top: 24px;
+        border-top: 1px solid var(--line);
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+      @media (max-width: 720px) {
+        .phase {
+          grid-template-columns: 1fr;
+        }
+        .page {
+          padding: 32px 18px 60px;
+        }
+        .placeholder {
+          min-height: 220px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <div
+        style="
+          position: fixed;
+          top: 0;
+          left: 0;
+          background: #000;
+          border-bottom: 1px solid #ddd;
+          z-index: 9999;
+          padding: 10px 16px;
+          font-family: barlow, sans-serif;
+        "
+      >
+        <a href="../" style="text-decoration: none; color: #fff"> ← Back to lesson homepage </a>
+      </div>
+      <header>
+        <div class="eyebrow">Strategic Brand Engagement · Tutorial 04</div>
+        <h1>From Flow to Usable Screens</h1>
+        <p class="intro">
+          This teaching sequence guides students from a UX flow into usable low-fidelity screens, interaction states, a
+          simple clickable prototype, and a peer usability check.
+        </p>
+      </header>
+
+      <div class="meta-grid">
+        <div class="meta-card">
+          <h3>Session Length</h3>
+          <p>Approx. 4 hours</p>
+        </div>
+        <div class="meta-card">
+          <h3>Main Tool</h3>
+          <p>Figma reference file</p>
+        </div>
+        <div class="meta-card">
+          <h3>Teaching Method</h3>
+          <p>Show → Attempt → Reveal → Refine → Connect → Test</p>
+        </div>
+      </div>
+
+      <section>
+        <h2>Purpose of the Session</h2>
+        <div class="note-card">
+          <p>
+            Students should understand that screen design is not only about visual layout. A usable interface must
+            translate a flow into clear screens, show what users can do, respond to user decisions, and provide
+            feedback.
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <h2>Full Teaching Sequence</h2>
+
+        <article class="phase">
+          <div>
+            <div class="phase-number">Phase 1</div>
+            <span class="duration">10–15 mins</span>
+          </div>
+          <div>
+            <h3>Setup & Framing</h3>
+            <p><strong>Objective:</strong> Set expectations and focus students on clarity, not visual polish.</p>
+            <h4>Instructor does</h4>
+            <ul>
+              <li>Introduce the session: moving from UX flow to actual screens.</li>
+              <li>Show the UX Flow and Flow-to-Screen Mapping pages.</li>
+              <li>Explain Entry, Action, and Outcome screens.</li>
+            </ul>
+            <blockquote>We are not designing pretty UI today. We are designing usable interaction.</blockquote>
+          </div>
+        </article>
+
+        <div class="image-card">
+          <h3>Screenshot 1 — UX Flow + Screen Mapping</h3>
+          <p>This shows how the UX flow is translated into Entry, Action, and Outcome screens.</p>
+          <!-- Replace this placeholder with your screenshot: <img class="screenshot" src="images/t04-01-flow-mapping.png" alt="UX flow and flow-to-screen mapping in Figma"> -->
+          <div class="placeholder">
+            <img
+              class="screenshot"
+              src="images/t04-01-flow-mapping.png"
+              alt="UX flow and flow-to-screen mapping in Figma"
+            />
+          </div>
+          <div class="caption">
+            What to look for: the flow should not be treated as decoration. It is the source that determines what
+            screens need to be designed.
+          </div>
+        </div>
+
+        <article class="phase">
+          <div>
+            <div class="phase-number">Phase 2</div>
+            <span class="duration">15–20 mins</span>
+          </div>
+          <div>
+            <h3>Guided Demo: Screen 1 Only</h3>
+            <p><strong>Objective:</strong> Introduce basic Figma setup through the Entry screen.</p>
+            <h4>Instructor demonstrates</h4>
+            <ul>
+              <li>Create a mobile frame.</li>
+              <li>Add title, subtitle, and card structure.</li>
+              <li>Apply basic spacing and grouping.</li>
+              <li>Show how the card functions as an interaction point.</li>
+            </ul>
+            <h4>Teaching points</h4>
+            <ul>
+              <li>Hierarchy: title → content → action.</li>
+              <li>Grouping: related information should sit together.</li>
+              <li>Scan behaviour: users scan before they read.</li>
+            </ul>
+            <blockquote>Do not show the full solution yet. Students should not simply copy the file.</blockquote>
+          </div>
+        </article>
+
+        <article class="phase">
+          <div>
+            <div class="phase-number">Phase 3</div>
+            <span class="duration">30–40 mins</span>
+          </div>
+          <div>
+            <h3>Student Build: First Attempt</h3>
+            <p><strong>Objective:</strong> Let students attempt their own screen translation independently.</p>
+            <h4>Students create</h4>
+            <ul>
+              <li>Screen 1 — Entry</li>
+              <li>Screen 2 — Action</li>
+              <li>Screen 3 — Outcome</li>
+            </ul>
+            <h4>Instructor observes</h4>
+            <ul>
+              <li>Is the main action clear?</li>
+              <li>Is the layout too cluttered?</li>
+              <li>Is there a visible hierarchy?</li>
+              <li>Does the screen match the UX flow?</li>
+            </ul>
+            <blockquote>Allow controlled struggle. Do not correct everything immediately.</blockquote>
+          </div>
+        </article>
+
+        <article class="phase">
+          <div>
+            <div class="phase-number">Phase 4</div>
+            <span class="duration">20–25 mins</span>
+          </div>
+          <div>
+            <h3>Intervention: States & Interaction</h3>
+            <p><strong>Objective:</strong> Show that interfaces are not static. They change based on user action.</p>
+            <h4>Instructor shows</h4>
+            <p>Use the reference Figma file to show the Action screen evolving through interaction states:</p>
+            <div class="flow-box">No Selection → Day Selected → Time Selected → Ready to Book → Confirmation</div>
+            <h4>Key teaching points</h4>
+            <ul>
+              <li>State: selected vs not selected.</li>
+              <li>Progressive disclosure: show actions when they become relevant.</li>
+              <li>CTA clarity: the user should know when they can act.</li>
+            </ul>
+            <h4>Questions to ask</h4>
+            <ul>
+              <li>What changed between each screen?</li>
+              <li>When can the user act?</li>
+              <li>How does the system show feedback?</li>
+            </ul>
+          </div>
+        </article>
+
+        <div class="image-card">
+          <h3>Screenshot 2 — Low-Fi Screens + Interaction States</h3>
+          <p>
+            The sequence illustrates how the Action screen changes as users make decisions, progressing from no
+            selection to booking and confirmation.
+          </p>
+          <!-- Replace this placeholder with your screenshot: <img class="screenshot" src="images/t04-02-lowfi-states.png" alt="Low-fidelity screens and interaction states in Figma"> -->
+          <div class="placeholder">
+            <img
+              class="screenshot"
+              src="images/t04-02-low-fi-screens.png"
+              alt="Low-fi screens and interaction states in Figma"
+            />
+            <img
+              class="screenshot"
+              src="images/t04-02-low-fi-screens-row2.png"
+              alt="Low-fi screens and interaction states in Figma"
+            />
+          </div>
+          <div class="caption">
+            What to look for: Screen 2 is not multiple unrelated pages. It is one action screen changing based on user
+            decisions.
+          </div>
+        </div>
+
+        <article class="phase">
+          <div>
+            <div class="phase-number">Phase 5</div>
+            <span class="duration">30–40 mins</span>
+          </div>
+          <div>
+            <h3>Student Refinement</h3>
+            <p>
+              <strong>Objective:</strong> Students improve their first attempt using interaction and hierarchy
+              principles.
+            </p>
+            <h4>Students update</h4>
+            <ul>
+              <li>Add or clarify selection states.</li>
+              <li>Improve visual hierarchy.</li>
+              <li>Clarify the primary CTA.</li>
+              <li>Ensure the screen matches the flow.</li>
+            </ul>
+            <h4>Instructor guides</h4>
+            <ul>
+              <li>Ask students where the user should tap first.</li>
+              <li>Check whether the action appears at the correct moment.</li>
+              <li>Encourage simpler layouts over decorative visuals.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="phase">
+          <div>
+            <div class="phase-number">Phase 6</div>
+            <span class="duration">15–20 mins</span>
+          </div>
+          <div>
+            <h3>Prototype Demo</h3>
+            <p><strong>Objective:</strong> Introduce basic clickable prototype linking.</p>
+            <h4>Instructor demonstrates</h4>
+            <ul>
+              <li>Select an interactive element, such as “Tap to view”.</li>
+              <li>Go to Prototype mode.</li>
+              <li>Add interaction: On Tap → Navigate to Screen 2.</li>
+              <li>Preview the prototype and click through the interaction.</li>
+            </ul>
+            <blockquote>Every interaction has a trigger and an outcome.</blockquote>
+          </div>
+        </article>
+
+        <div class="image-card">
+          <h3>Screenshot 3 — Prototype Linking Example</h3>
+          <p>This shows how a simple interaction connects one screen to another through a trigger and an outcome.</p>
+          <!-- Replace this placeholder with your screenshot: <img class="screenshot" src="images/t04-03-prototype-linking.png" alt="Prototype linking interaction in Figma"> -->
+          <div class="placeholder">
+            <img
+              class="screenshot"
+              src="images/t04-03-prototype-linking.png"
+              alt="Prototype linking interaction in Figma"
+            />
+          </div>
+          <div class="caption">
+            What to look for: do not overbuild. One clean interaction path is enough for Tutorial 04.
+          </div>
+        </div>
+
+        <article class="phase">
+          <div>
+            <div class="phase-number">Phase 7</div>
+            <span class="duration">20–30 mins</span>
+          </div>
+          <div>
+            <h3>Student Prototype</h3>
+            <p><strong>Objective:</strong> Students apply basic linking to their own screens.</p>
+            <h4>Students connect</h4>
+            <ul>
+              <li>Screen 1 → Screen 2</li>
+              <li>Screen 2 → Screen 3</li>
+            </ul>
+            <p>
+              Scope should remain simple. Students only need one clear path. No complex branching is required at this
+              stage.
+            </p>
+          </div>
+        </article>
+
+        <article class="phase">
+          <div>
+            <div class="phase-number">Phase 8</div>
+            <span class="duration">20–30 mins</span>
+          </div>
+          <div>
+            <h3>Usability Check: Peer Testing</h3>
+            <p><strong>Objective:</strong> Evaluate whether the prototype is clear and usable.</p>
+            <h4>Students test in pairs</h4>
+            <ul>
+              <li>What do you do first?</li>
+              <li>Where did you hesitate?</li>
+              <li>What confused you?</li>
+            </ul>
+            <h4>Instructor reinforces</h4>
+            <ul>
+              <li>Clarity over aesthetics.</li>
+              <li>Usability over completeness.</li>
+              <li>Feedback and refinement are part of the design process.</li>
+            </ul>
+          </div>
+        </article>
+      </section>
+
+      <section>
+        <h2>Key Learning Outcomes</h2>
+        <div class="note-card">
+          <ul class="checklist">
+            <li>Translate a UX flow into usable screen structures.</li>
+            <li>Understand the role of Entry, Action, and Outcome screens.</li>
+            <li>Recognise how interaction states affect usability.</li>
+            <li>Create a simple clickable prototype in Figma.</li>
+            <li>Use peer testing to identify hesitation, confusion, and unclear actions.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <h2>Teaching Notes</h2>
+        <div class="two-col">
+          <div class="note-card">
+            <h3>Do not reveal everything upfront</h3>
+            <p>Show the reference file in stages. Students should attempt the task before seeing the full solution.</p>
+          </div>
+          <div class="note-card">
+            <h3>Keep the prototype simple</h3>
+            <p>One clear path is enough. The goal is to understand interaction linking, not advanced prototyping.</p>
+          </div>
+          <div class="note-card">
+            <h3>Use questions to guide feedback</h3>
+            <p>Ask: “What is the main action?”, “Where do I tap?”, and “What changed after the user acted?”</p>
+          </div>
+          <div class="note-card">
+            <h3>Focus on usability</h3>
+            <p>No branding, no colour polish, and no decorative visuals are required at this stage.</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Summary Flow</h2>
+        <div class="flow-box">Show → Attempt → Reveal → Refine → Connect → Test</div>
+      </section>
+
+      <footer>Strategic Brand Engagement · Tutorial 04 · From Flow to Usable Screens</footer>
+    </main>
+  </body>
+</html>
