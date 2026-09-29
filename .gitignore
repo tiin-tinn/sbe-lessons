@@ -1,0 +1,8 @@
+.DS_Store
+Thumbs.db
+
+# Large source: publish as a Release asset after local review.
+/resources/examples/a2/example-05/prototype.fig
+
+# Local preview screenshots
+/Claude outputs/
