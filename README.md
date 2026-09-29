@@ -11,7 +11,7 @@ Static teaching resource website for colleague review and sharing.
 - `figma/04/` — Figma walkthrough
 - `resources/briefs/` — four assignment briefs
 - `resources/examples/` — anonymous example collections, PDFs, a journey-map image and Figma downloads
-- `resources/examples/a3/example-01/` through `example-04/` — A3 case study pages (`index.html`), styled by `assets/case-study.css`
+- `resources/examples/a2/example-01/` through `example-06/` and `resources/examples/a3/example-01/` through `example-04/` — case study pages (`index.html`), styled by `assets/case-study.css`
 
 Exported course asset names are preserved because the course players refer to them internally. Public resource paths use lowercase names and hyphens.
 
@@ -31,6 +31,9 @@ The other Figma files are downloads intended for import into Figma. They are not
 
 The original student submission HTML was excluded from the public resource tree because it contained identifying submission metadata and an owner-linked URL. Its PDF deliverables and Figma source are included under anonymous example labels. Original files and the private rename map are retained outside this repository in the Codex task workspace.
 
-## A3 case studies
+## Case studies
+
+Each A2 example folder holds a case study page, the anonymised deliverables, a Figma source download and selected images in `images/`. Example 01's design document was compressed for the web, and a borrowed Singpass screenshot in Example 02's prototype board had its account name removed; originals are kept in `../originals/a2/`.
+
 
 Each A3 example folder holds a case study page, the redacted presentation PDF, selected slide images in `images/` and, for Example 01, compressed MP4 videos. Group member names were removed from the PDF covers and closing slides; the unredacted originals are kept outside this repository in `../originals/a3/`. The page summaries were drafted from each team's slides and can be edited directly in each `index.html`.
