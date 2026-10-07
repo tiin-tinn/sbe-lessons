@@ -73,7 +73,15 @@ def main():
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--commit", action="store_true")
     a = ap.parse_args()
-    zips = [Path(p) for p in a.zips] or sorted(DEFAULT_INBOX.glob("*-raw-*.zip"))
+    if a.zips:
+        zips = [Path(p) for p in a.zips]
+    else:  # newest export per lesson/tutorial only
+        newest = {}
+        for z in sorted(DEFAULT_INBOX.glob("*-raw-*.zip"), key=lambda z: z.stat().st_mtime):
+            m = NAME.match(z.name)
+            if m:
+                newest[m.group(1, 2)] = z
+        zips = list(newest.values())
     if not zips:
         sys.exit(f"No Rise web exports found in {DEFAULT_INBOX}")
     done = [replace(z, a.dry_run) for z in zips]
