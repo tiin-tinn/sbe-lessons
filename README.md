@@ -37,3 +37,11 @@ Each A2 example folder holds a case study page, the anonymised deliverables, a F
 
 
 Each A3 example folder holds a case study page, the redacted presentation PDF, selected slide images in `images/` and, for Example 01, compressed MP4 videos. Group member names were removed from the PDF covers and closing slides; the unredacted originals are kept outside this repository in `../originals/a3/`. The page summaries were drafted from each team's slides and can be edited directly in each `index.html`.
+
+## Updating a lesson or tutorial
+
+1. In Rise, Export > **Web** and save the zip to `2STBRND Strategic Brand Engagement/Lesson packages/HTML`.
+2. From this folder run `python3 tools/update_rise.py --dry-run` to see which folder each zip will replace, then `python3 tools/update_rise.py --commit`.
+3. Review the commit and push to `main`.
+
+Zip names decide the target: `lesson-02-…-raw-XXXX.zip` → `lessons/02`, `tutorial-01-…-raw-XXXX.zip` → `tutorials/01`. SCORM packages are refused.
