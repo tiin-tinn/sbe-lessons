@@ -40,7 +40,7 @@ Each A3 example folder holds a case study page, the redacted presentation PDF, s
 
 ## Updating a lesson or tutorial
 
-1. In Rise, Export > **Web** and save the zip to `2STBRND Strategic Brand Engagement/Lesson packages/HTML`.
+1. In Rise, Export > **Web** and save the zip to `2STBRND Strategic Brand Engagement/07 Teaching Materials/Lesson Packages/HTML`.
 2. From this folder run `python3 tools/update_rise.py --dry-run` to see which folder each zip will replace, then `python3 tools/update_rise.py --commit`.
 3. Review the commit and push to `main`.
 

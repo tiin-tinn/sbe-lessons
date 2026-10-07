@@ -16,7 +16,7 @@ import argparse, io, json, re, shutil, subprocess, sys, tempfile, zipfile
 from pathlib import Path
 
 SITE = Path(__file__).resolve().parent.parent
-DEFAULT_INBOX = Path.home() / "Desktop/2STBRND Strategic Brand Engagement/Lesson packages/HTML"
+DEFAULT_INBOX = Path.home() / "Desktop/2STBRND Strategic Brand Engagement/07 Teaching Materials/Lesson Packages/HTML"
 NAME = re.compile(r"^(lesson|tutorial)-(\d{2})-.*-raw-([A-Za-z0-9_]+)\.zip$")
 
 def target_for(zpath):
